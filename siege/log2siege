@@ -1,0 +1,1 @@
+tail -n 5000 log | grep GET | cut -d '"' -f 2 | cut -d ' ' -f 2 | xargs -I {} echo http://www.example.com{} > long_url_list.txt

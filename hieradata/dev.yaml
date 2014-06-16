@@ -1,0 +1,20 @@
+---
+mysql::server::root_password: 'weakpassword'
+site::newrelic::apikey: 'ed049627db4502a1f2717fe54f726f1f478a70fa'
+site::newrelic::default_appname: 'dev'
+
+databases:
+  dev:
+    user: 'dev'
+    password: 'devdbpass'
+    host: '%'
+    grant:
+      - 'ALL'
+      - 'SUPER'
+
+newrelic_plugins::mysql::servers:
+  - name: 'dev mysql'
+  - host: '192.168.33.12'
+  - metrics: 'status,newrelic'
+  - mysql_user: 'dev_joomla'
+  - mysql_passwd: 'devdbpass'

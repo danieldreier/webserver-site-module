@@ -1,0 +1,21 @@
+[main]
+    confdir = /etc/puppet
+    logdir = /var/log/puppet
+    rundir = /var/run/puppet
+    ssldir = /ssl
+    environment = production
+    modulepath = $confdir/environments/$environment/modules:$confdir/environments/$environment/
+[agent]
+    server = puppetmaster.deployto.net
+    pluginsync = true
+    report = true
+    classfile = /classes.txt
+    localconfig = /localconfig
+    runinterval = 15m
+    splay = true
+    splaylimit = 5m
+
+[master]
+    storeconfigs = true
+    storeconfigs_backend = puppetdb
+    manifest = $confdir/environments/$environment/site/manifests/site.pp

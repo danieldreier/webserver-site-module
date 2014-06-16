@@ -1,0 +1,28 @@
+--- # this is for the test environment as used in rspec and beaker tests
+# copy to dev.yaml and modify as needed for the dev environment, for example
+# settings common to multiple environments should be in common.yaml
+mysql::server::root_password: 'weakpassword'
+site::newrelic::apikey: 'NEW_RELIC_KEY_HERE'
+site::newrelic::default_appname: 'example-dev'
+
+databases:
+  onedb:
+    user: 'dev_db'
+    password: 'devdbpass'
+    host: '%'
+    grant:
+      - 'ALL'
+      - 'SUPER'
+  monitorme:
+    user: 'monitor'
+    password: 'me'
+    host: '%'
+    grant:
+      - 'ALL'
+
+newrelic_plugins::mysql::servers:
+  - name: 'dev mysql'
+  - host: '192.168.33.12'
+  - metrics: 'status,newrelic'
+  - mysql_user: 'monitor'
+  - mysql_passwd: 'me'

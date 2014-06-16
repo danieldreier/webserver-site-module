@@ -1,0 +1,48 @@
+---
+ntp::restrict:
+  - 127.0.0.1
+ntp::enable: true
+ntp::servers:
+  - 0.north-america.pool.ntp.org iburst
+  - 0.centos.pool.ntp.org iburst
+  - time.nist.gov iburst
+  - nist1-la.ustiming.org iburst
+apache::mod::prefork::startservers: 8
+apache::mod::prefork::minspareservers: 5
+apache::mod::prefork::maxspareservers: 10
+apache::mod::prefork::serverlimit: 10
+apache::mod::prefork::maxclients: 10
+apache::mod::prefork::maxrequestsperchild: 750
+site::roles::webserver::vhosts:
+  example.com:
+    vhost_name: "*"
+    port: "80"
+    docroot_owner: examplecom
+    docroot: "/var/www/vhosts/example.com"
+    serveraliases:
+      - example.com
+      - www.example.com
+      - staging.example.com
+    override: "All"
+users_sysadmins:
+  daniel:
+    ensure: present
+    groups: sudo
+    shell: /bin/bash
+    comment: Change this unless you want me to have root
+    managehome: true
+    ssh_authorized_keys:
+      daniel_key:
+        type: 'ssh-rsa'
+        key:  'AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5ZkFSMxx2k7DdoG41m+dg7xixjrIDXNSWalLDWCDZCE8rtKU0Y7s6B9AC1RXMuq7/o1m9mt/Xo1LYtzJFsTkcTK07TlGTPH0cUWI8Xuqj2uut0PsxIUb/QnUTG0pvDy2/soM3E5ocEhYO6vHJWZE3VgJT+GHoa+cLFmG6+SU+7F90FqyqU9WrEqFPBUCbYUxXgU/U/vfF2auhqDZS87ZNdtNnyPG0m8Ccp06ZG2+CfGU48d9Wvz7NuaR7OQ5kXTSSQ86pO5Vl8JlF8LPB9lsnPOn3qcdHTLIgYQ3pYED+bbnjMKhPLXImCw/HR6L/N2l0nq6bYRk89YEygeMgPFB'
+users_sites:
+  examplecom:
+    ensure: present
+    shell: /bin/bash
+    groups: www-data
+    comment: example site user
+    managehome: true
+    ssh_authorized_keys:
+      daniel_odp_key:
+        type: 'ssh-rsa'
+        key:  'AAAAB3NzaC1yc2EAAAADAQABAAABAQDN5ZkFSMxx2k7DdoG41m+dg7xixjrIDXNSWalLDWCDZCE8rtKU0Y7s6B9AC1RXMuq7/o1m9mt/Xo1LYtzJFsTkcTK07TlGTPH0cUWI8Xuqj2uut0PsxIUb/QnUTG0pvDy2/soM3E5ocEhYO6vHJWZE3VgJT+GHoa+cLFmG6+SU+7F90FqyqU9WrEqFPBUCbYUxXgU/U/vfF2auhqDZS87ZNdtNnyPG0m8Ccp06ZG2+CfGU48d9Wvz7NuaR7OQ5kXTSSQ86pO5Vl8JlF8LPB9lsnPOn3qcdHTLIgYQ3pYED+bbnjMKhPLXImCw/HR6L/N2l0nq6bYRk89YEygeMgPFB'

@@ -1,0 +1,6 @@
+---
+:cachedir: /var/cache/r10k
+:sources:
+  :local:
+    remote: /vagrant
+    basedir: /etc/puppet/environments

@@ -1,0 +1,4 @@
+If you're building a web server, you'll need to do load testing.
+The log2siege shell script is an example of how you might convert
+apache logs into siege-friendly URL lists. This isn't a finished
+product, just convenience tools that I've used while working.

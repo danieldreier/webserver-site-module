@@ -1,0 +1,29 @@
+---
+mysql::server::root_password: 'changeme_please'
+site::newrelic::apikey: 'new_relic_api_key_here'
+site::newrelic::default_appname: 'example.com'
+
+site::roles::mysql::server::backup_password: 'changeme_aswell'
+
+newrelic_plugins::mysql::servers:
+  - name: 'production'
+    host: 'localhost'
+    metrics: 'status,newrelic'
+    mysql_user: 'newrelic'
+    mysql_passwd: 'changeme_too'
+
+databases:
+  odpdb:
+    user: 'exampledb'
+    password: 'hunter2'
+    host: '%'
+    grant:
+      - 'ALL'
+  newrelic:
+    user: 'newrelic'
+    password: 'hunter2-ing'
+    host: '%'
+    grant:
+      - 'ALL'
+      - 'PROCESS'
+      - 'REPLICATION CLIENT'

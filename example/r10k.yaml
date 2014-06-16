@@ -1,0 +1,6 @@
+---
+:cachedir: /var/cache/r10k
+:sources:
+  :local:
+    remote: git@github.com:danieldreier/deploytome-site.git
+    basedir: /etc/puppet/environments

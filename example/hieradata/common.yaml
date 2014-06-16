@@ -1,0 +1,17 @@
+---
+ntp::restrict:
+  - 127.0.0.1
+ntp::servers:
+  - 0.north-america.pool.ntp.org iburst
+  - 1.north-america.pool.ntp.org iburst
+  - 2.north-america.pool.ntp.org iburst
+site::roles::webserver::vhosts:
+  example.com:
+    vhost_name: "example.com"
+    port: "80"
+    docroot: "/var/www/example.com"
+    serveraliases:
+      - www.example.com
+      - dev.example.com
+      - staging.example.com
+    override: "All"
